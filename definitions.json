@@ -1,0 +1,75 @@
+{
+  "rabbit_version": "3.8.9",
+  "users": [
+    {
+      "name": "guest",
+      "password": "guest",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "queues": [
+    {
+      "name": "factorial.queue",
+      "vhost": "/",
+      "durable": true
+    },
+    {
+      "name": "factorial.cancel.queue",
+      "vhost": "/",
+      "durable": true
+    },
+    {
+      "name": "factorial.result.queue",
+      "vhost": "/",
+      "durable": true
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "factorial-exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true
+    }
+  ],
+  "bindings": [
+    {
+      "source": "factorial-exchange",
+      "vhost": "/",
+      "destination": "factorial.queue",
+      "destination_type": "queue",
+      "routing_key": "factorial",
+      "arguments": {}
+    },
+    {
+      "source": "factorial-exchange",
+      "vhost": "/",
+      "destination": "factorial.cancel.queue",
+      "destination_type": "queue",
+      "routing_key": "cancel",
+      "arguments": {}
+    },
+    {
+      "source": "factorial-exchange",
+      "vhost": "/",
+      "destination": "factorial.result.queue",
+      "destination_type": "queue",
+      "routing_key": "result",
+      "arguments": {}
+    }
+  ]
+}

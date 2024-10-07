@@ -1,0 +1,5 @@
+rootProject.name = 'anylogic'
+
+include 'anylogic-manager'
+include 'anylogic-worker'
+
